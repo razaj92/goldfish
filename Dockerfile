@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.6
 
 # Version of goldfish to install
 ENV GOLDFISH_VERSION=v0.8.0
@@ -9,13 +9,14 @@ WORKDIR /app
 # Install Goldfish binary and clean up
 RUN   apk --no-cache add \
       curl \
+      openssl \
       ca-certificates && \
       curl -L -o goldfish https://github.com/Caiyeon/goldfish/releases/download/$GOLDFISH_VERSION/goldfish-linux-amd64 && \
       chmod +x ./goldfish
 
 COPY entrypoint.sh .
 
-#Set entrypoint to executable for docker-compose
+#Set entrypoint to executable
 RUN chmod +x ./entrypoint.sh
 
 #Default port to expose
