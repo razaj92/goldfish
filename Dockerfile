@@ -1,7 +1,7 @@
 FROM alpine:3.6
 
 # Version of goldfish to install
-ENV GOLDFISH_VERSION=v0.8.0
+ENV GOLDFISH_VERSION=v0.9.0
 
 # Directory to put Goldfish binary in
 WORKDIR /app
