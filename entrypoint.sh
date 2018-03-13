@@ -1,12 +1,15 @@
 #!/bin/sh
 
-openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout vault-ui.key -out vault-ui.crt -subj "/C=GB/O=vault/CN=vault-ui"
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout goldfish.key -out goldfish.crt -subj "/C=GB/O=vault/CN=goldfish"
 
 cat <<EOF > /app/config.hcl
 listener "tcp" {
   address       = ":8000"
-  tls_cert_file = "/app/vault-ui.crt"
-  tls_key_file  = "/app/vault-ui.key"
+
+  certificate "local" {
+    cert_file = "/app/goldfish.crt"
+    key_file  = "/app/goldfish.key"
+  }
 }
 
 vault {
